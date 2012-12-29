@@ -71,6 +71,13 @@ int main(int argc, char *argv[])
 	/* Send the event to the window manager */
 	XSendEvent(d, root, False, SubstructureRedirectMask | SubstructureNotifyMask, &xev);
 
+	/* Output the new state ("visible" or "hidden") so the calling program
+	 * can react accordingly.
+	 */
+	if(argc > 1 && !strcmp(argv[1], "-q")) {
+		printf("%s\n", current ? "hidden" : "visible");
+	}
+
 	XCloseDisplay(d);
 	exit(EXIT_SUCCESS);
 
